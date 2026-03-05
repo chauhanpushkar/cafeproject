@@ -93,7 +93,7 @@ _Add screenshots of the website here._
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/chauhanpushkar/cafeproject/fluffy-cloud-cafe.git
+git clone https://github.com/chauhanpushkar/cafeproject.git
 ```
 
 ### 2️⃣ Open the project folder
