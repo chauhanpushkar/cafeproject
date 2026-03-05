@@ -1,4 +1,4 @@
-Fluffy Cloud Cafe – Modern Café Website Template
+#Fluffy Cloud Cafe – Modern Café Website Template
 
 A modern, responsive, and beautifully animated café website template built with HTML, CSS, and JavaScript.
 This template is perfect for cafés, coffee shops, bakeries, and small restaurant businesses that want an elegant online presence.
