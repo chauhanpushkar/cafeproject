@@ -39,23 +39,40 @@ Clean and **beginner-friendly folder structure**.
 # 📂 Project Structure
 
 ```
-Fluffy-Cloud-Cafe/
+# 📁 Project Structure
+
+```text
+fluffy-cloud-cafe/
 │
-├── index.html
-├── menu.html
-├── about.html
-├── contact.html
+├── index.html           # Home page (Hero, special offers, popular items)
+├── menu.html            # Menu page (Filtering, search, full product grid)
+├── product.html         # Individual product detail page
+├── cart.html            # Shopping cart page
+├── checkout.html        # Multi-step checkout process
+├── tracking.html        # Live order tracking page
+├── about.html           # About us & our story page
+├── reviews.html         # Customer reviews and submission form
+├── contact.html         # Contact information and map
 │
-├── css/
-│   └── style.css
+├── styles.css           # Global CSS, variables, animations, responsive utilities
+├── main.js              # Global JavaScript (Cart logic, navigation, animations)
 │
-├── js/
-│   └── script.js
+├── admin/               # 🛡️ Admin Panel
+│   ├── index.html       # Analytics Dashboard
+│   ├── login.html       # Admin authentication screen
+│   ├── orders.html      # Incoming orders management
+│   ├── menu.html        # Add/edit/delete menu items
+│   ├── customers.html   # Customer database
+│   ├── coupons.html     # Promotional discount codes
+│   ├── reviews.html     # Review moderation
+│   ├── reports.html     # Revenue and sales charts
+│   └── admin-styles.css # CSS for the admin dashboard
 │
-├── images/
-│   └── food-images
-│
-└── README.md
+└── *.png                # Image assets (hero, coffee, pastry)
+```
+
+---
+
 ```
 
 ---
