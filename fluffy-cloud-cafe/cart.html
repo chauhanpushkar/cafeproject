@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Fluffy Cloud Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+        }
+
+        .cart-item__img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+        }
+
+        .cart-item__details {
+            flex: 1;
+        }
+
+        .cart-item__name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .cart-item__price {
+            font-family: var(--font-main);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item__remove {
+            color: var(--text-light);
+            background: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .cart-item__remove:hover {
+            color: #d32f2f;
+        }
+
+        .order-summary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--text-mid);
+        }
+
+        .summary-row.total {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            border-top: 1.5px solid rgba(111, 78, 55, 0.15);
+            padding-top: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .promo-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .promo-input-group .form-input {
+            margin-bottom: 0;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--text-light);
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+                position: relative;
+            }
+
+            .cart-item__img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .cart-item__remove {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-warm">
+
+        <!-- Navbar -->
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-cloud"></i> <span>Fluffy Cloud</span> Cafe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="admin/index.html" class="btn btn-secondary btn-sm" title="Admin Panel"><i class="fas fa-user-shield"></i> Admin</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i> Cart
+                    <span class="cart-count" style="display:none;">0</span>
+                </a>
+            </div>
+            <button class="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="cart.html" class="nav-link">Cart (<span class="cart-count">0</span>)</a>
+        <a href="admin/index.html" class="nav-link">Admin Panel</a>
+    </div>
+
+    <section class="section" style="padding-top: 8rem; min-height: 80vh;">
+        <div class="container">
+            <h1 class="section-title mb-4" data-aos="fadeUp">Your Cart</h1>
+
+            <div id="cartContent" class="cart-layout" style="display: none;">
+
+                <div class="cart-items" id="cartItemsList">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <div class="order-summary" data-aos="fadeLeft">
+                    <h3 class="section-title" style="font-size: 1.5rem;">Order Summary</h3>
+                    <div class="divider" style="margin: 1rem 0;"></div>
+
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotalVal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Taxes (5%)</span>
+                        <span id="taxVal">₹0.00</span>
+                    </div>
+                    <div class="summary-row" id="discountRow" style="display: none; color: #2e7d32;">
+                        <span>Discount (10%)</span>
+                        <span id="discountVal">-₹0.00</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span class="color-primary" id="finalTotal">₹0.00</span>
+                    </div>
+
+                    <div class="promo-input-group mt-3">
+                        <input type="text" class="form-input" id="promoCode" placeholder="Promo Code (CLOUD10)">
+                        <button class="btn btn-secondary" id="btnApplyPromo">Apply</button>
+                    </div>
+
+                    <a href="checkout.html" class="btn btn-primary btn-block btn-lg">Proceed to Checkout <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+
+            <div id="emptyCart" class="empty-cart" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your cart is feeling light as a cloud!</h3>
+                <p class="section-subtitle mt-1 mb-3">Add some delicious treats to start your order.</p>
+                <a href="menu.html" class="btn btn-primary btn-lg">Browse Menu</a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let isDiscountApplied = false;
+
+            function renderCart() {
+                const items = Cart.getItems();
+                const cartContent = document.getElementById('cartContent');
+                const emptyCart = document.getElementById('emptyCart');
+                const list = document.getElementById('cartItemsList');
+
+                if (items.length === 0) {
+                    cartContent.style.display = 'none';
+                    emptyCart.style.display = 'block';
+                    return;
+                }
+
+                cartContent.style.display = 'grid';
+                emptyCart.style.display = 'none';
+
+                list.innerHTML = items.map((item, index) => `
+          <div class="cart-item" data-aos="fadeUp" data-aos-delay="${index * 100}">
+            <img src="${item.img}" alt="${item.name}" class="cart-item__img">
+            <div class="cart-item__details">
+              <div class="cart-item__name">${item.name}</div>
+              <div class="cart-item__price">${formatPrice(item.price)}</div>
+            </div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="updateItem('${item.id}', -1)"><i class="fas fa-minus"></i></button>
+              <span class="qty-val">${item.qty}</span>
+              <button class="qty-btn" onclick="updateItem('${item.id}', 1)"><i class="fas fa-plus"></i></button>
+            </div>
+            <button class="cart-item__remove" onclick="removeItem('${item.id}')" title="Remove Item">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        `).join('');
+
+                updateSummary(items);
+            }
+
+            function updateSummary(items) {
+                const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+                const tax = subtotal * 0.05;
+                let discount = 0;
+
+                if (isDiscountApplied) {
+                    discount = subtotal * 0.10;
+                    document.getElementById('discountRow').style.display = 'flex';
+                    document.getElementById('discountVal').textContent = `-${formatPrice(discount)}`;
+                } else {
+                    document.getElementById('discountRow').style.display = 'none';
+                }
+
+                const total = subtotal + tax - discount;
+
+                document.getElementById('subtotalVal').textContent = formatPrice(subtotal);
+                document.getElementById('taxVal').textContent = formatPrice(tax);
+                document.getElementById('finalTotal').textContent = formatPrice(total);
+            }
+
+            window.updateItem = (id, delta) => {
+                Cart.updateQty(id, delta);
+                renderCart();
+            };
+            window.removeItem = (id) => {
+                Cart.removeItem(id);
+                renderCart();
+            };
+
+            document.getElementById('btnApplyPromo').addEventListener('click', () => {
+                const code = document.getElementById('promoCode').value.trim().toUpperCase();
+                if (code === 'CLOUD10') {
+                    isDiscountApplied = true;
+                    showToast('Promo code applied! 10% off.');
+                    renderCart();
+                } else {
+                    showToast('Invalid promo code', 'error');
+                }
+            });
+
+            renderCart();
+        });
+    </script>
+</body>
+
+</html>

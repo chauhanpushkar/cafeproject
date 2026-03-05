@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Reports | Fluffy Cloud Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-cloud"></i> Fluffy Admin
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="orders.html" class="nav-item"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+            <li><a href="menu.html" class="nav-item"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="coupons.html" class="nav-item"><i class="fas fa-ticket-alt"></i> Coupons</a></li>
+            <li><a href="reviews.html" class="nav-item"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="reports.html" class="nav-item active"><i class="fas fa-file-invoice-dollar"></i> Reports</a>
+            </li>
+        </ul>
+        <div style="padding: 1.5rem; margin-top: auto;">
+            <a href="../index.html" class="nav-item" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="admin-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Sales & Analytics</h1>
+            </div>
+            <div class="user-profile">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Admin User</span>
+                <div class="user-avatar">A</div>
+            </div>
+        </header>
+
+        <div
+            style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <select class="form-select" style="min-width: 150px;">
+                    <option>Last 7 Days</option>
+                    <option selected>This Month</option>
+                    <option>Last Month</option>
+                    <option>This Year</option>
+                    <option>All Time</option>
+                </select>
+                <button class="btn btn-primary" onclick="alert('Generating PDF Report...')"><i
+                        class="fas fa-download"></i> Export Report</button>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="dashboard-grid">
+            <div class="table-card" style="margin-top: 0; padding: 1.5rem;">
+                <h3 style="font-family: var(--font-main); margin-bottom: 0.5rem;">Monthly Revenue Growth</h3>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Total revenue
+                    generated over the year</p>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="revenueGrowthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="table-card" style="margin-top: 0; padding: 1.5rem;">
+                <h3 style="font-family: var(--font-main); margin-bottom: 0.5rem;">Sales by Category</h3>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Which items are
+                    performing the best</p>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="categorySalesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Selling Items Table -->
+        <div class="table-card" style="margin-top: 0;">
+            <div class="table-header">
+                <h3>Top Selling Items</h3>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Units Sold</th>
+                            <th>Revenue Generated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: 700;">#1</td>
+                            <td><strong>Signature Cloud Latte</strong></td>
+                            <td><span class="badge" style="background: rgba(255,255,255,0.1);">Coffee</span></td>
+                            <td>1,245</td>
+                            <td style="font-family: var(--font-main); color: var(--success);">₹3,72,255.00</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: 700;">#2</td>
+                            <td><strong>Tiramisu Jar</strong></td>
+                            <td><span class="badge" style="background: rgba(255,255,255,0.1);">Desserts</span></td>
+                            <td>890</td>
+                            <td style="font-family: var(--font-main); color: var(--success);">₹3,10,610.00</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: 700;">#3</td>
+                            <td><strong>Matcha Cloud Dream</strong></td>
+                            <td><span class="badge" style="background: rgba(255,255,255,0.1);">Tea</span></td>
+                            <td>750</td>
+                            <td style="font-family: var(--font-main); color: var(--success);">₹1,86,750.00</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary); font-weight: 700;">#4</td>
+                            <td><strong>Avocado Cloud Toast</strong></td>
+                            <td><span class="badge" style="background: rgba(255,255,255,0.1);">Snacks</span></td>
+                            <td>610</td>
+                            <td style="font-family: var(--font-main); color: var(--success);">₹2,00,690.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Chart.defaults.color = '#aaaaaa';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            // Revenue Growth Line Chart
+            const ctxGrowth = document.getElementById('revenueGrowthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: [350000, 410000, 452000, null, null, null],
+                        backgroundColor: '#A8D8EA',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#333' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Category Sales Doughnut Chart
+            const ctxCat = document.getElementById('categorySalesChart').getContext('2d');
+            new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Coffee', 'Desserts', 'Snacks', 'Tea'],
+                    datasets: [{
+                        data: [45, 25, 15, 15],
+                        backgroundColor: ['#A8D8EA', '#FFC107', '#4CAF50', '#F44336'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 12 } }
+                    },
+                    cutout: '70%',
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

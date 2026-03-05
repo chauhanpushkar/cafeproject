@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Fluffy Cloud</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1.5px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--hover-shadow);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Clouds */
+        .login-container::before,
+        .login-container::after {
+            content: '\f0c2';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: -1;
+        }
+
+        .login-container::before {
+            font-size: 8rem;
+            top: -20px;
+            left: -30px;
+            animation: floatCloud 8s ease-in-out infinite;
+        }
+
+        .login-container::after {
+            font-size: 5rem;
+            bottom: -10px;
+            right: -20px;
+            animation: floatCloud 6s ease-in-out infinite reverse;
+        }
+
+        .login-logo {
+            font-family: var(--font-main);
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--text-mid);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-main);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-mid);
+        }
+
+        .form-input {
+            padding-left: 2.8rem;
+            height: 50px;
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-mid);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-logo">
+            <i class="fas fa-cloud"></i> Fluffy Admin
+        </div>
+        <div class="login-subtitle">Sign in to manage your cafe</div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" class="form-input" id="email" required placeholder="admin@fluffycloud.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" class="form-input" id="password" required placeholder="••••••••">
+                </div>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnLogin" style="margin-top: 1rem;">
+                Sign In <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </form>
+
+        <a href="../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Cafe
+        </a>
+    </div>
+
+    <script src="../main.js"></script>
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnLogin');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                showToast('Login successful! Redirecting...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 800);
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

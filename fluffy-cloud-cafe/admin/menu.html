@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management | Fluffy Cloud Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <style>
+        .item-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            vertical-align: middle;
+            border: 1px solid var(--border);
+            background: var(--admin-bg);
+        }
+
+        /* Admin Modal */
+        .admin-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .admin-modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .admin-modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+
+        .admin-modal-overlay.active .admin-modal {
+            transform: scale(1);
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .modal-head h3 {
+            font-family: var(--font-main);
+        }
+
+        .btn-close {
+            background: none;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .btn-close:hover {
+            color: var(--danger);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-cloud"></i> Fluffy Admin
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="orders.html" class="nav-item"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+            <li><a href="menu.html" class="nav-item active"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="coupons.html" class="nav-item"><i class="fas fa-ticket-alt"></i> Coupons</a></li>
+            <li><a href="reviews.html" class="nav-item"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="reports.html" class="nav-item"><i class="fas fa-file-invoice-dollar"></i> Reports</a></li>
+        </ul>
+        <div style="padding: 1.5rem; margin-top: auto;">
+            <a href="../index.html" class="nav-item" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="admin-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Menu Management</h1>
+            </div>
+            <div class="user-profile">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Admin User</span>
+                <div class="user-avatar">A</div>
+            </div>
+        </header>
+
+        <div style="display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            <div style="display: flex; gap: 1rem; flex: 1; max-width: 600px;">
+                <input type="text" class="form-input" placeholder="Search menu...">
+                <select class="form-select" style="max-width: 200px;">
+                    <option value="">Category: All</option>
+                    <option>Coffee</option>
+                    <option>Tea</option>
+                    <option>Snacks</option>
+                    <option>Desserts</option>
+                </select>
+                <button class="btn" style="background: var(--hover); color: var(--text-primary);"><i
+                        class="fas fa-filter"></i></button>
+            </div>
+            <button class="btn btn-primary" onclick="openMenuModal('add')">
+                <i class="fas fa-plus"></i> Add New Item
+            </button>
+        </div>
+
+        <!-- Menu Table -->
+        <div class="table-card" style="margin-top: 0;">
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="../coffee.png" class="item-img" alt="Latte"></td>
+                            <td>
+                                <strong style="color: var(--text-primary);">Signature Cloud Latte</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Velvety oat milk
+                                    latte...</span>
+                            </td>
+                            <td><span class="badge"
+                                    style="background: rgba(255,255,255,0.1); color: #fff;">Coffee</span></td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹299.00</td>
+                            <td><span style="color: var(--success); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Available</span></td>
+                            <td>
+                                <button class="action-btn" title="Edit" onclick="openMenuModal('edit')"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="../pastry.png" class="item-img" alt="Toast"></td>
+                            <td>
+                                <strong style="color: var(--text-primary);">Avocado Cloud Toast</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Sourdough toast
+                                    with...</span>
+                            </td>
+                            <td><span class="badge"
+                                    style="background: rgba(255,255,255,0.1); color: #fff;">Snacks</span></td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹329.00</td>
+                            <td><span style="color: var(--success); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Available</span></td>
+                            <td>
+                                <button class="action-btn" title="Edit" onclick="openMenuModal('edit')"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="../pastry.png" class="item-img" alt="Macaron"></td>
+                            <td>
+                                <strong style="color: var(--text-primary);">Caramel Macarons</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">French macarons
+                                    with...</span>
+                            </td>
+                            <td><span class="badge"
+                                    style="background: rgba(255,255,255,0.1); color: #fff;">Desserts</span></td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹249.00</td>
+                            <td><span style="color: var(--warning); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Low Stock</span></td>
+                            <td>
+                                <button class="action-btn" title="Edit" onclick="openMenuModal('edit')"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div
+                style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border);">
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Showing 1 to 3 of 52 entries</span>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn"
+                        style="background: var(--hover); color: var(--text-secondary);">Previous</button>
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn" style="background: var(--hover); color: var(--text-secondary);">2</button>
+                    <button class="btn" style="background: var(--hover); color: var(--text-secondary);">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div class="admin-modal-overlay" id="menuModal">
+        <div class="admin-modal">
+            <div class="modal-head">
+                <h3 id="modalTitle">Add Menu Item</h3>
+                <button class="btn-close" onclick="closeMenuModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); saveItem();">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Item
+                            Name</label>
+                        <input type="text" class="form-input" required placeholder="E.g. Matcha Latte">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Price
+                            (₹)</label>
+                        <input type="number" class="form-input" required placeholder="0.00">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Category</label>
+                        <select class="form-select" required>
+                            <option value="" disabled selected>Select...</option>
+                            <option>Coffee</option>
+                            <option>Tea</option>
+                            <option>Snacks</option>
+                            <option>Desserts</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Badge
+                            (Optional)</label>
+                        <input type="text" class="form-input" placeholder="e.g. Popular">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label
+                        style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Description</label>
+                    <textarea class="form-input" rows="3" required
+                        placeholder="Short description of the item..."></textarea>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <label
+                        style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Item
+                        Image</label>
+                    <input type="file" class="form-input" style="padding: 0.4rem;" accept="image/*">
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn" style="background: var(--hover); color: var(--text-primary);"
+                        onclick="closeMenuModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openMenuModal(action) {
+            document.getElementById('modalTitle').textContent = action === 'add' ? 'Add Menu Item' : 'Edit Menu Item';
+            document.getElementById('menuModal').classList.add('active');
+        }
+        function closeMenuModal() {
+            document.getElementById('menuModal').classList.remove('active');
+        }
+        function saveItem() {
+            const btn = document.getElementById('btnSave');
+            const originalText = btn.textContent;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                closeMenuModal();
+                alert('Item saved successfully!');
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

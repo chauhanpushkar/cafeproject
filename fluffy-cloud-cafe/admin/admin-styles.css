@@ -1,0 +1,367 @@
+/* ============================================================
+   FLUFFY CLOUD CAFE – Admin Global Styles
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --admin-bg: #121212;
+    --sidebar-bg: #1e1e1e;
+    --card-bg: #272727;
+    --text-primary: #f0f0f0;
+    --text-secondary: #aaaaaa;
+    --primary: #A8D8EA;
+    /* Cloud blue for admin accent */
+    --primary-dark: #82c8e0;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #F44336;
+    --border: #333333;
+    --hover: #2c2c2c;
+    --sidebar-width: 260px;
+
+    --font-main: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--admin-bg);
+    color: var(--text-primary);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: var(--font-main);
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    font-family: var(--font-main);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-list {
+    padding: 1rem 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.nav-item {
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: var(--hover);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+.nav-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    width: calc(100% - var(--sidebar-width));
+}
+
+/* Header */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--admin-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+/* Dashboard Cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-icon.blue {
+    background: rgba(168, 216, 234, 0.15);
+    color: var(--primary);
+}
+
+.stat-icon.green {
+    background: rgba(76, 175, 80, 0.15);
+    color: var(--success);
+}
+
+.stat-icon.yellow {
+    background: rgba(255, 193, 7, 0.15);
+    color: var(--warning);
+}
+
+.stat-icon.red {
+    background: rgba(244, 67, 54, 0.15);
+    color: var(--danger);
+}
+
+.stat-details h3 {
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+    font-family: var(--font-main);
+}
+
+.stat-details p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tables */
+.table-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.table-header h3 {
+    font-family: var(--font-main);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-pending {
+    background: rgba(255, 193, 7, 0.15);
+    color: var(--warning);
+}
+
+.badge-confirmed {
+    background: rgba(168, 216, 234, 0.15);
+    color: var(--primary);
+}
+
+.badge-ready {
+    background: rgba(76, 175, 80, 0.15);
+    color: var(--success);
+}
+
+/* Table Actions */
+.action-btn {
+    background: none;
+    color: var(--text-secondary);
+    border: none;
+    font-size: 1rem;
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+    transition: color 0.2s;
+}
+
+.action-btn:hover {
+    color: var(--primary);
+}
+
+.action-btn.delete:hover {
+    color: var(--danger);
+}
+
+/* Inputs & Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.form-input,
+.form-select {
+    background: var(--admin-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    width: 100%;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+}
+
+/* Hamburger Mobile */
+.mobile-toggle {
+    display: none;
+    background: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management | Fluffy Cloud Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-cloud"></i> Fluffy Admin
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="orders.html" class="nav-item active"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+            <li><a href="menu.html" class="nav-item"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="coupons.html" class="nav-item"><i class="fas fa-ticket-alt"></i> Coupons</a></li>
+            <li><a href="reviews.html" class="nav-item"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="reports.html" class="nav-item"><i class="fas fa-file-invoice-dollar"></i> Reports</a></li>
+        </ul>
+        <div style="padding: 1.5rem; margin-top: auto;">
+            <a href="../index.html" class="nav-item" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="admin-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Order Management</h1>
+            </div>
+            <div class="user-profile">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Admin User</span>
+                <div class="user-avatar">A</div>
+            </div>
+        </header>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <input type="text" class="form-input" placeholder="Search by Order ID or Name..." style="max-width: 400px;">
+            <select class="form-select" style="max-width: 200px;">
+                <option value="">Status: All</option>
+                <option value="Pending">Pending</option>
+                <option value="Preparing">Preparing</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+        </div>
+
+        <div class="table-card" style="margin-top: 0;">
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-family: var(--font-main); color: var(--text-primary);">#FC10928</td>
+                            <td>
+                                <strong>Sarah Jenkins</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">UPI Payment</span>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">
+                                2x Signature Cloud Latte<br>
+                                1x Truffle Bruschetta
+                            </td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹628.00</td>
+                            <td>
+                                <select class="form-select"
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--hover);">
+                                    <option selected>Pending</option>
+                                    <option>Confirmed</option>
+                                    <option>Preparing</option>
+                                    <option>Ready</option>
+                                    <option>Completed</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn" title="Print Receipt"><i class="fas fa-print"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: var(--font-main); color: var(--text-primary);">#FC10927</td>
+                            <td>
+                                <strong>Michael R.</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Card Payment</span>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">
+                                4x Tiramisu Jar<br>
+                                2x Cold Brew
+                            </td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹1,240.00</td>
+                            <td>
+                                <select class="form-select"
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--hover);">
+                                    <option>Pending</option>
+                                    <option>Confirmed</option>
+                                    <option selected>Preparing</option>
+                                    <option>Ready</option>
+                                    <option>Completed</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn" title="Print Receipt"><i class="fas fa-print"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: var(--font-main); color: var(--text-primary);">#FC10926</td>
+                            <td>
+                                <strong>Liam Chen</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">Cash</span>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">
+                                1x Avocado Toast<br>
+                                1x Masala Chai
+                            </td>
+                            <td style="font-family: var(--font-main); font-weight: 600;">₹459.00</td>
+                            <td>
+                                <select class="form-select"
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.8rem; background: var(--hover);">
+                                    <option>Pending</option>
+                                    <option>Confirmed</option>
+                                    <option>Preparing</option>
+                                    <option>Ready</option>
+                                    <option selected>Completed</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="action-btn" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn" title="Print Receipt"><i class="fas fa-print"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div
+                style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border);">
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Showing 1 to 3 of 120 entries</span>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn"
+                        style="background: var(--hover); color: var(--text-secondary);">Previous</button>
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn" style="background: var(--hover); color: var(--text-secondary);">2</button>
+                    <button class="btn" style="background: var(--hover); color: var(--text-secondary);">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

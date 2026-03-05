@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | Fluffy Cloud Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .menu-header {
+            padding: 8rem 1.5rem 2rem;
+            background: var(--bg-base) url('hero.png') center/cover no-repeat;
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(253, 246, 239, 0.95), rgba(253, 246, 239, 0.98));
+            z-index: -1;
+        }
+
+        .filters-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-cloud"></i> <span>Fluffy Cloud</span> Cafe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i> Cart
+                    <span class="cart-count" style="display:none;">0</span>
+                </a>
+            </div>
+            <button class="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="cart.html" class="nav-link">Cart (<span class="cart-count">0</span>)</a>
+    </div>
+
+    <!-- Menu Header -->
+    <header class="menu-header">
+        <div class="container" data-aos="fadeUp">
+            <h1 class="section-title">Explore Our Menu</h1>
+            <p class="section-subtitle mt-1" style="margin: 0 auto;">Discover our artisan drinks and dreamy treats.</p>
+
+            <div class="filters-wrap">
+                <div class="search-wrap" style="width: 100%;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Search for coffee, tea, desserts...">
+                </div>
+
+                <div class="filter-tabs" id="categoryTabs">
+                    <button class="filter-tab active" data-cat="all">All Items</button>
+                    <button class="filter-tab" data-cat="coffee">Coffee</button>
+                    <button class="filter-tab" data-cat="tea">Tea & Info</button>
+                    <button class="filter-tab" data-cat="snacks">Savory Snacks</button>
+                    <button class="filter-tab" data-cat="desserts">Dreamy Desserts</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Section -->
+    <section class="section pt-0">
+        <div class="container">
+
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-search"></i>
+                <h3>No items found</h3>
+                <p>Try adjusting your search or category filter.</p>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Rendered by JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bottom Cart Bar (Mobile) -->
+    <div class="bottom-cart-bar" id="bottomCartBar">
+        <div class="d-flex align-center gap-1">
+            <i class="fas fa-shopping-bag" style="font-size: 1.25rem;"></i>
+            <div>
+                <div class="bc-count" style="font-size: 0.8rem; font-weight: normal;">0 items</div>
+                <div class="bc-total">₹0.00</div>
+            </div>
+        </div>
+        <a href="cart.html" class="btn btn-accent btn-sm" style="color: var(--primary-dark);">View Cart</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            &copy; 2026 Fluffy Cloud Cafe. All rights reserved.
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuGrid = document.getElementById('menuGrid');
+            const searchInput = document.getElementById('searchInput');
+            const tabs = document.querySelectorAll('.filter-tab');
+            const emptyState = document.getElementById('emptyState');
+
+            let currentCat = 'all';
+            let searchQuery = '';
+
+            function renderMenu() {
+                const filtered = MENU_DATA.filter(item => {
+                    const matchCat = currentCat === 'all' || item.cat === currentCat;
+                    const matchSearch = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+                    return matchCat && matchSearch;
+                });
+
+                if (filtered.length === 0) {
+                    menuGrid.innerHTML = '';
+                    emptyState.style.display = 'block';
+                } else {
+                    emptyState.style.display = 'none';
+                    // Wrap link to product page
+                    menuGrid.innerHTML = filtered.map(item => {
+                        return `
+              <div class="menu-card glass-card" data-aos="fadeUp">
+                <a href="product.html?id=${item.id}" style="display:block; color:inherit;">
+                  <div class="menu-card__img-wrap">
+                    <img src="${item.img}" alt="${item.name}" class="menu-card__img" loading="lazy">
+                    ${item.badge ? `<span class="menu-card__badge">${item.badge}</span>` : ''}
+                  </div>
+                </a>
+                <div class="menu-card__body">
+                  <a href="product.html?id=${item.id}" style="display:block; color:inherit;">
+                    <div class="menu-card__name">${item.name}</div>
+                    <div class="menu-card__desc">${item.desc}</div>
+                  </a>
+                  <div class="menu-card__footer">
+                    <span class="menu-card__price">${formatPrice(item.price)}</span>
+                    <button class="menu-card__add" onclick="Cart.addItem({id:'${item.id}',name:'${item.name}',price:${item.price},img:'${item.img}'}); event.stopPropagation();" title="Add to cart">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+                    }).join('');
+                }
+
+                // Retrigger AOS inside DOM newly created elements
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('aos-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px 50px 0px' });
+
+                menuGrid.querySelectorAll('[data-aos]').forEach(el => {
+                    el.classList.add('aos-pending');
+                    observer.observe(el);
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCat = tab.dataset.cat;
+                    renderMenu();
+                });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderMenu();
+            });
+
+            renderMenu();
+        });
+    </script>
+</body>
+
+</html>

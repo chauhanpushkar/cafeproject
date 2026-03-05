@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Fluffy Cloud Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-img-wrap {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+        }
+
+        .story-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .story-float {
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 40%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            border: 8px solid var(--bg-base);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border: 1.5px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--bg-base);
+            box-shadow: var(--card-shadow);
+        }
+
+        .team-name {
+            font-family: var(--font-main);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .team-role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-socials {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .team-socials a {
+            color: var(--text-mid);
+            transition: color 0.3s;
+        }
+
+        .team-socials a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-img-wrap {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-warm">
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-cloud"></i> <span>Fluffy Cloud</span> Cafe
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i> Cart
+                    <span class="cart-count" style="display:none;">0</span>
+                </a>
+            </div>
+            <button class="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="reviews.html" class="nav-link">Reviews</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="cart.html" class="nav-link">Cart (<span class="cart-count">0</span>)</a>
+    </div>
+
+    <section class="section" style="padding-top: 8rem;">
+        <div class="container text-center" data-aos="fadeUp">
+            <div class="section-label">Our Story</div>
+            <h1 class="section-title">Where Dreams and<br>Coffee Meet</h1>
+        </div>
+
+        <div class="container story-grid">
+            <div class="story-img-wrap" data-aos="fadeRight">
+                <img src="hero.png" alt="Cafe Interior" class="story-img">
+                <img src="coffee.png" alt="Coffee Art" class="story-float">
+            </div>
+
+            <div data-aos="fadeLeft">
+                <h3 class="section-title mb-2" style="font-size: 2rem;">A Cloud of Happiness</h3>
+                <p class="section-subtitle color-text-dark mb-2" style="max-width: 100%;">
+                    Founded in 2026, Fluffy Cloud Cafe began with a simple mission: to create a cozy sanctuary in the
+                    middle of a bustling city. A place where every sip feels like a warm hug, and every bite transports
+                    you to a sweeter moment.
+                </p>
+                <p class="section-subtitle color-text-dark mb-4" style="max-width: 100%;">
+                    We source only the finest ethical coffee beans and bake our artisan desserts fresh every morning.
+                    Our pastel-themed interior is designed specifically to lower stress and invite creativity,
+                    conversation, and comfort.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <div>
+                        <h4 class="color-primary" style="font-size: 1.5rem;">50+</h4>
+                        <span class="text-light">Menu Items</span>
+                    </div>
+                    <div style="width:1px; background: rgba(111,78,55,0.2); margin: 0 1rem;"></div>
+                    <div>
+                        <h4 class="color-primary" style="font-size: 1.5rem;">12k+</h4>
+                        <span class="text-light">Happy Customers</span>
+                    </div>
+                    <div style="width:1px; background: rgba(111,78,55,0.2); margin: 0 1rem;"></div>
+                    <div>
+                        <h4 class="color-primary" style="font-size: 1.5rem;">100%</h4>
+                        <span class="text-light">Locally Sourced</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-gradient-sky">
+        <div class="container">
+            <div class="text-center" data-aos="fadeUp">
+                <div class="section-label">The People</div>
+                <h2 class="section-title">Meet Our Cloud Makers</h2>
+                <p class="section-subtitle mt-1" style="margin: 0 auto;">The talented team behind your daily dose of
+                    happiness.</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card" data-aos="fadeUp" data-aos-delay="0">
+                    <img src="hero.png" alt="Emma" class="team-img">
+                    <h4 class="team-name">Emma Cloud</h4>
+                    <p class="team-role">Founder & Master Roaster</p>
+                    <div class="team-socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-card" data-aos="fadeUp" data-aos-delay="100">
+                    <img src="pastry.png" alt="Julian" class="team-img" style="object-position: center top;">
+                    <h4 class="team-name">Julian Baker</h4>
+                    <p class="team-role">Head Pastry Chef</p>
+                    <div class="team-socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-card" data-aos="fadeUp" data-aos-delay="200">
+                    <img src="coffee.png" alt="Sophia" class="team-img" style="object-position: right;">
+                    <h4 class="team-name">Sophia Art</h4>
+                    <p class="team-role">Lead Barista</p>
+                    <div class="team-socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            &copy; 2026 Fluffy Cloud Cafe. All rights reserved.
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

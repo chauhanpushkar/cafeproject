@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluffy Cloud Cafe | Premium Coffee & Sweet Moments</title>
+
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Home Page Specific Styles */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-base) url('hero.png') center/cover no-repeat;
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(253, 246, 239, 0.9) 0%, rgba(253, 246, 239, 0.5) 50%, rgba(111, 78, 55, 0.4) 100%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 1280px;
+      padding: 0 2rem;
+    }
+
+    .hero-box {
+      max-width: 640px;
+    }
+
+    .hero-title {
+      font-family: var(--font-main);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-mid);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Offers Carousel */
+    .offers-scroll {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 1rem 0 2rem 0;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .offers-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .offer-card {
+      flex: 0 0 85%;
+      max-width: 480px;
+      scroll-snap-align: center;
+      background: var(--bg-base) url('pastry.png') center/cover no-repeat;
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      padding: 3rem 2rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 1;
+    }
+
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(253, 246, 239, 0.95) 0%, rgba(253, 246, 239, 0.85) 50%, rgba(111, 78, 55, 0.4) 100%);
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-cloud"></i> <span>Fluffy Cloud</span> Cafe
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="admin/login.html" class="btn btn-secondary btn-sm" title="Admin Panel"><i
+            class="fas fa-user-shield"></i> Admin</a>
+        <a href="cart.html" class="cart-btn">
+          <i class="fas fa-shopping-bag"></i> Cart
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+      </div>
+      <button class="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="menu.html" class="nav-link">Menu</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="reviews.html" class="nav-link">Reviews</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="cart.html" class="nav-link">Cart (<span class="cart-count">0</span>)</a>
+    <a href="admin/login.html" class="nav-link">Admin Panel</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="cloud-float" style="top: 15%; left: 10%; width: 120px; height: 120px;"></div>
+    <div class="cloud-float" style="top: 40%; right: 15%; width: 180px; height: 180px; animation-duration: 8s;"></div>
+    <div class="cloud-float" style="bottom: 20%; left: 30%; width: 100px; height: 100px; animation-duration: 5s;"></div>
+
+    <div class="hero-content">
+      <div class="hero-box" data-aos="fadeRight">
+        <div class="section-label">Premium Cafe Experience</div>
+        <h1 class="hero-title">Fresh Coffee,<br>Sweet Moments <i class="fas fa-cloud color-primary"></i></h1>
+        <p class="hero-subtitle">Experience the taste of happiness at Fluffy Cloud Cafe. Artisan coffee, dreamy
+          desserts, and a cozy atmosphere perfect for your daily escape.</p>
+
+        <div class="steam-wrap mb-4">
+          <div class="steam"></div>
+          <div class="steam"></div>
+          <div class="steam"></div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="menu.html" class="btn btn-primary btn-lg">Order Now <i class="fas fa-arrow-right"></i></a>
+          <a href="about.html" class="btn btn-secondary btn-lg">Our Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label" data-aos="fadeUp">Limited Time</div>
+      <h2 class="section-title" data-aos="fadeUp">Special Offers</h2>
+
+      <div class="offers-scroll mt-4" data-aos="fadeUp">
+
+        <div class="offer-card">
+          <span class="badge badge-primary mb-2">20% OFF</span>
+          <h3 class="section-title" style="font-size: 2rem;">Morning Cloud Trio</h3>
+          <p class="section-subtitle mt-1 mb-3">Get our signature Cloud Latte with any two croissants for a perfect
+            morning start.</p>
+          <a href="menu.html" class="btn btn-accent"><i class="fas fa-shopping-bag"></i> Claim Offer</a>
+        </div>
+
+        <div class="offer-card" style="background-image: url('coffee.png');">
+          <span class="badge badge-accent mb-2">Buy 1 Get 1</span>
+          <h3 class="section-title" style="font-size: 2rem;">Cold Brew Hours</h3>
+          <p class="section-subtitle mt-1 mb-3">Beat the heat. Buy any Cold Brew and get a second one free every weekday
+            2PM-5PM.</p>
+          <a href="menu.html" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Claim Offer</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Items -->
+  <section class="section bg-gradient-sky">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label" data-aos="fadeUp">Our Bestsellers</div>
+        <h2 class="section-title" data-aos="fadeUp">Popular Favorites</h2>
+        <p class="section-subtitle mt-2" data-aos="fadeUp">The items our customers keep coming back for, crafted with
+          love and premium ingredients.</p>
+      </div>
+
+      <div class="menu-grid mt-4" id="popularGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="text-center mt-4 pt-2" data-aos="fadeUp">
+        <a href="menu.html" class="btn btn-secondary">View Full Menu <i class="fas fa-book-open"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Cart Bar (Mobile) -->
+  <div class="bottom-cart-bar" id="bottomCartBar">
+    <div class="d-flex align-center gap-1">
+      <i class="fas fa-shopping-bag" style="font-size: 1.25rem;"></i>
+      <div>
+        <div class="bc-count" style="font-size: 0.8rem; font-weight: normal;">0 items</div>
+        <div class="bc-total">₹0.00</div>
+      </div>
+    </div>
+    <a href="cart.html" class="btn btn-accent btn-sm" style="color: var(--primary-dark);">View Cart</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo mb-2">
+          <i class="fas fa-cloud"></i> <span>Fluffy Cloud</span>
+        </a>
+        <p class="footer-desc">Premium artisan coffee and dreamy desserts served in a warm, cozy cloud-themed
+          atmosphere.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Our Menu</a>
+          <a href="about.html">About Us</a>
+          <a href="reviews.html">Customer Reviews</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Help</h4>
+        <div class="footer-links">
+          <a href="contact.html">Contact Us</a>
+          <a href="tracking.html">Track Order</a>
+          <a href="#">FAQ</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Contact</h4>
+        <div class="footer-links">
+          <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;"><i class="fas fa-map-marker-alt"></i> 123
+            Cloud Street, Sky City</span>
+          <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;"><i class="fas fa-phone"></i> +1 234 567
+            8900</span>
+          <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;"><i class="fas fa-envelope"></i>
+            hello@fluffycloud.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Fluffy Cloud Cafe. All rights reserved.
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="main.js"></script>
+  <script>
+    // Render popular items on Home Page
+    document.addEventListener('DOMContentLoaded', () => {
+      const popularGrid = document.getElementById('popularGrid');
+      const popularItems = MENU_DATA.filter(i => i.badge === 'Popular').slice(0, 4);
+      if (popularGrid) {
+        popularGrid.innerHTML = popularItems.map(item => buildMenuCard(item)).join('');
+      }
+    });
+  </script>
+</body>
+
+</html>

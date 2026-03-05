@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Management | Fluffy Cloud Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-cloud"></i> Fluffy Admin
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="orders.html" class="nav-item"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+            <li><a href="menu.html" class="nav-item"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="customers.html" class="nav-item"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="coupons.html" class="nav-item"><i class="fas fa-ticket-alt"></i> Coupons</a></li>
+            <li><a href="reviews.html" class="nav-item active"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="reports.html" class="nav-item"><i class="fas fa-file-invoice-dollar"></i> Reports</a></li>
+        </ul>
+        <div style="padding: 1.5rem; margin-top: auto;">
+            <a href="../index.html" class="nav-item" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="admin-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Customer Reviews</h1>
+            </div>
+            <div class="user-profile">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Admin User</span>
+                <div class="user-avatar">A</div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-icon yellow"><i class="fas fa-star"></i></div>
+                <div class="stat-details">
+                    <p>Average Rating</p>
+                    <h3>4.8 / 5.0</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-comment-dots"></i></div>
+                <div class="stat-details">
+                    <p>Total Reviews</p>
+                    <h3>1,420</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-details">
+                    <p>Approved</p>
+                    <h3>1,412</h3>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <input type="text" class="form-input" placeholder="Search reviews by content..." style="max-width: 400px;">
+            <select class="form-select" style="max-width: 200px;">
+                <option value="">Rating: All</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+            </select>
+            <button class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
+        </div>
+
+        <!-- Reviews Table -->
+        <div class="table-card" style="margin-top: 0;">
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Rating</th>
+                            <th style="width: 40%;">Review Content</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong style="color: var(--text-primary);">Sarah Jenkins</strong><br>
+                                <span
+                                    style="color: var(--text-secondary); font-size: 0.8rem;">sarah.j@example.com</span>
+                            </td>
+                            <td style="color: #F4B942;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></td>
+                            <td>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">Absolutely
+                                    in love with the Signature Cloud Latte! The atmosphere here is so cozy...</p>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">Mar 03, 2026</td>
+                            <td><span style="color: var(--success); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Approved</span></td>
+                            <td>
+                                <button class="action-btn" title="Reply"><i class="fas fa-reply"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong style="color: var(--text-primary);">Michael R.</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">mike.r@example.com</span>
+                            </td>
+                            <td style="color: #F4B942;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star-half-alt"></i></td>
+                            <td>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">The
+                                    Tiramisu Jar is out of this world. Delivery was fast and packaging cute!</p>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">Feb 26, 2026</td>
+                            <td><span style="color: var(--success); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Approved</span></td>
+                            <td>
+                                <button class="action-btn" title="Reply"><i class="fas fa-reply"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong style="color: var(--text-primary);">Anonymous User</strong><br>
+                                <span style="color: var(--text-secondary); font-size: 0.8rem;">No email</span>
+                            </td>
+                            <td style="color: #F4B942;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
+                            <td>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">The wait
+                                    time was a bit too long during the morning rush. Coffee was okay.</p>
+                            </td>
+                            <td style="color: var(--text-secondary); font-size: 0.85rem;">Feb 20, 2026</td>
+                            <td><span style="color: var(--warning); font-size: 0.85rem;"><i class="fas fa-circle"></i>
+                                    Pending</span></td>
+                            <td>
+                                <button class="action-btn" title="Approve"><i class="fas fa-check"></i></button>
+                                <button class="action-btn" title="Reply"><i class="fas fa-reply"></i></button>
+                                <button class="action-btn delete" title="Delete"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
